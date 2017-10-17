@@ -172,7 +172,7 @@ int main()
     cout << "0 * (1, 2, 3, 4) = ";
     a.display_quaternion();
 
-    cout << "/* クォータニオンのテスト演算" << endl;
+    cout << "/* クォータニオンのテスト演算 */" << endl;
 
     return 0;
 }
