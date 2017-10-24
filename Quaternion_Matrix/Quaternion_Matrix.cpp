@@ -2,6 +2,7 @@
 #include <algorithm>
 #include <math.h>
 #include <string>
+#include <complex>
 
 using namespace std;
 
@@ -50,6 +51,9 @@ class Matrix
 
     // 転置行列の生成
     Matrix &trans();
+
+    // 共役転置の生成
+    Matrix &conj();
 };
 
 // 足し算代入
@@ -143,9 +147,25 @@ Matrix<T, N> &Matrix<T, N>::trans()
     return *this;
 }
 
+// 共役転置行列の生成
+template <typename T, int N>
+Matrix<T, N> &Matrix<T, N>::conj()
+{
+    trans();
+    for(int i=0;i<N;i++)
+    {
+        for(int j=0;j<N;j++)
+        {
+            m[i][j] = std::conj(m[i][j]);
+        }
+    }
+    return *this;
+}
+
 int main()
 {
     Matrix<double, 2> a(0), b(1), c(2), d(3), e(0); // 代入値は対角行列の数値(1の時，単位行列になる)
+    Matrix<complex<double>, 2> ca(1);
     //a.assign(1, 0, 0);
     
     a = c + d;
@@ -174,5 +194,21 @@ int main()
     cout << e(0, 0) << e(0, 1) << endl;
     cout << e(1, 0) << e(1, 1) << endl << endl;
 
+    //ca(0, 0) = complex<double> (1, 2);
+    //ca(0, 1) = complex<double> (3, 4);
+    //ca(1, 0) = complex<double> (5, 6); 
+    //ca(1, 1) = complex<double> (7, 8);
+    ca.assign(complex<double>(1, 2), 0, 0);
+    ca.assign(complex<double>(3, 4), 0, 1);
+    ca.assign(complex<double>(5, 6), 1, 0);
+    ca.assign(complex<double>(7, 8), 1, 1);
+
+    cout << ca(0, 0) << ca(0, 1) << endl;
+    cout << ca(1, 0) << ca(1, 1) << endl << endl;    
+    
+    ca.conj();
+    cout << ca(0, 0) << ca(0, 1) << endl;
+    cout << ca(1, 0) << ca(1, 1) << endl << endl;    
+ 
     return 0;
 }
