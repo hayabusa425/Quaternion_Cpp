@@ -1,4 +1,5 @@
 #include <iostream>
+#include <algorithm>
 #include <math.h>
 #include <string>
 
@@ -46,6 +47,9 @@ class Matrix
 
     // 掛け算代入
     Matrix &operator *= (const Matrix &);
+
+    // 転置行列の生成
+    Matrix &trans();
 };
 
 // 足し算代入
@@ -125,9 +129,23 @@ Matrix<T, N> &Matrix<T, N>::operator *= (const Matrix &a)
     return *this = *this * a;
 }
 
+// 転置行列の生成
+template <typename T, int N>
+Matrix<T, N> &Matrix<T, N>::trans()
+{
+    for(int i=0;i<N;i++)
+    {
+        for(int j=i+1;j<N;j++)
+        {
+            std::swap(m[i][j], m[j][i]);
+        }
+    }
+    return *this;
+}
+
 int main()
 {
-    Matrix<double, 2> a(0), b(1), c(2), d(3); // 代入値は対角行列の数値(1の時，単位行列になる)
+    Matrix<double, 2> a(0), b(1), c(2), d(3), e(0); // 代入値は対角行列の数値(1の時，単位行列になる)
     //a.assign(1, 0, 0);
     
     a = c + d;
@@ -144,6 +162,17 @@ int main()
     
     cout << a(0, 0) << a(0, 1) << endl;
     cout << a(1, 0) << a(1, 1) << endl << endl;
+
+    e.assign(1, 0, 0);
+    e.assign(2, 0, 1);
+    e.assign(3, 1, 0);
+    e.assign(4, 1, 1);
+    cout << e(0, 0) << e(0, 1) << endl;
+    cout << e(1, 0) << e(1, 1) << endl << endl;
+
+    e.trans();
+    cout << e(0, 0) << e(0, 1) << endl;
+    cout << e(1, 0) << e(1, 1) << endl << endl;
 
     return 0;
 }
