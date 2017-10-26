@@ -1,8 +1,10 @@
 #include <iostream>
-#include <algorithm>
+//#include <algorithm>
 #include <math.h>
 #include <string>
 #include <complex>
+
+//#define M_PI 3.141592
 
 using namespace std;
 
@@ -176,27 +178,27 @@ int main()
     //a.assign(1, 0, 0);
     
     a = c + d;
-
+    cout << "行列和aは c + d = " << endl;
     cout << a(0, 0) << a(0, 1) << endl;
     cout << a(1, 0) << a(1, 1) << endl << endl;
     
     a.negative();
-
+    cout << "aの和の逆元 = " << endl;
     cout << a(0, 0) << a(0, 1) << endl;
     cout << a(1, 0) << a(1, 1) << endl << endl;
 
     a = c * d;
-    
+    cout << "行列積 c * d = " << endl;
     cout << a(0, 0) << a(0, 1) << endl;
     cout << a(1, 0) << a(1, 1) << endl << endl;
 
+    cout << "転置行列" << endl;
     e.assign(1, 0, 0);
     e.assign(2, 0, 1);
     e.assign(3, 1, 0);
     e.assign(4, 1, 1);
     cout << e(0, 0) << e(0, 1) << endl;
     cout << e(1, 0) << e(1, 1) << endl << endl;
-
     e.trans();
     cout << e(0, 0) << e(0, 1) << endl;
     cout << e(1, 0) << e(1, 1) << endl << endl;
@@ -204,6 +206,7 @@ int main()
     double det_e = det(e);
     cout << "eの行列式 = " << det_e << endl << endl;
 
+    cout << "行列の要素を複素数(2元数)に" << endl;
     //ca(0, 0) = complex<double> (1, 2);
     //ca(0, 1) = complex<double> (3, 4);
     //ca(1, 0) = complex<double> (5, 6); 
@@ -212,13 +215,34 @@ int main()
     ca.assign(complex<double>(3, 4), 0, 1);
     ca.assign(complex<double>(5, 6), 1, 0);
     ca.assign(complex<double>(7, 8), 1, 1);
-
     cout << ca(0, 0) << ca(0, 1) << endl;
     cout << ca(1, 0) << ca(1, 1) << endl << endl;    
-    
+
+    cout << "上記の複素数行列を共役複素数に変換" << endl;
     ca.conj();
     cout << ca(0, 0) << ca(0, 1) << endl;
     cout << ca(1, 0) << ca(1, 1) << endl << endl;    
  
+    // ベクトルの回転の実装
+    double theta = 30 * (2 * M_PI / 360); // 回転角 1/6π
+    Matrix<double, 2> rot; // 回転行列
+    Matrix<double, 2> p, p_prime;
+    p.assign(20, 0, 0);
+    p.assign(30, 1, 0);
+    rot.assign(+std::cos(theta), 0, 0);
+    rot.assign(-std::sin(theta), 0, 1);
+    rot.assign(+std::sin(theta), 1, 0);
+    rot.assign(+std::cos(theta), 1, 1);
+    p_prime = rot * p; // pをtheta度回した結果をp_primeに代入
+    cout << "回転前の行列p = " << endl;
+    cout << p(0, 0) << " " << p(0, 1) << endl;
+    cout << p(1, 0) << " " << p(1, 1) << endl << endl;
+    cout << "回転行列T(theta) = " << endl;
+    cout << rot(0, 0) << " " << rot(0, 1) << endl;
+    cout << rot(1, 0) << " " << rot(1, 1) << endl << endl;
+    cout << "回転後の行列p_prime = " << endl;
+    cout << p_prime(0, 0) << " " << p_prime(0, 1) << endl;
+    cout << p_prime(1, 0) << " " << p_prime(1, 1) << endl << endl;
+
     return 0;
 }
