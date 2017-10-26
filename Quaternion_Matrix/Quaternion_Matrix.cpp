@@ -243,6 +243,10 @@ int main()
     cout << "回転後の行列p_prime = " << endl;
     cout << p_prime(0, 0) << " " << p_prime(0, 1) << endl;
     cout << p_prime(1, 0) << " " << p_prime(1, 1) << endl << endl;
+    p_prime = rot * p_prime;
+    cout << "もう一度回転させた行列p_prime = " << endl;
+    cout << p_prime(0, 0) << " " << p_prime(0, 1) << endl;
+    cout << p_prime(1, 0) << " " << p_prime(1, 1) << endl << endl;
 
     return 0;
 }
