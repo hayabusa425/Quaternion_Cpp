@@ -162,6 +162,13 @@ Matrix<T, N> &Matrix<T, N>::conj()
     return *this;
 }
 
+// 2x2の行列式の実装
+template <typename T>
+T det (const Matrix<T, 2> &a)
+{
+    return a(0, 0) * a(1, 1) - a(0, 1) * a(1, 0);
+}
+
 int main()
 {
     Matrix<double, 2> a(0), b(1), c(2), d(3), e(0); // 代入値は対角行列の数値(1の時，単位行列になる)
@@ -193,6 +200,9 @@ int main()
     e.trans();
     cout << e(0, 0) << e(0, 1) << endl;
     cout << e(1, 0) << e(1, 1) << endl << endl;
+
+    double det_e = det(e);
+    cout << "eの行列式 = " << det_e << endl << endl;
 
     //ca(0, 0) = complex<double> (1, 2);
     //ca(0, 1) = complex<double> (3, 4);
