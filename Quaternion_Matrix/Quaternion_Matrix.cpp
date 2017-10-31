@@ -236,17 +236,32 @@ int main()
     p_prime = rot * p; // pをtheta度回した結果をp_primeに代入
     cout << "回転前の行列p = " << endl;
     cout << p(0, 0) << " " << p(0, 1) << endl;
-    cout << p(1, 0) << " " << p(1, 1) << endl << endl;
+    cout << p(1, 0) << " " << p(1, 1) << endl;
     cout << "回転行列T(theta) = " << endl;
     cout << rot(0, 0) << " " << rot(0, 1) << endl;
-    cout << rot(1, 0) << " " << rot(1, 1) << endl << endl;
+    cout << rot(1, 0) << " " << rot(1, 1) << endl;
     cout << "回転後の行列p_prime = " << endl;
     cout << p_prime(0, 0) << " " << p_prime(0, 1) << endl;
-    cout << p_prime(1, 0) << " " << p_prime(1, 1) << endl << endl;
+    cout << p_prime(1, 0) << " " << p_prime(1, 1) << endl;
     p_prime = rot * p_prime;
     cout << "もう一度回転させた行列p_prime = " << endl;
     cout << p_prime(0, 0) << " " << p_prime(0, 1) << endl;
     cout << p_prime(1, 0) << " " << p_prime(1, 1) << endl << endl;
+
+    // 複素数による回転，複素平面(ガウス平面)による回転の捉え方
+    theta = 30 * (2 * M_PI / 360); // 回転角 1/6π
+    complex<double> u (std::cos(theta), std::sin(theta));
+    complex<double> p_c(20.0, 30.0);
+    complex<double> p_c_prime = u * p_c;
+    cout << "位置を表す複素数 p_c" << endl;
+    cout << p_c << endl;
+    cout << "回転を表す複素数 u" << endl;
+    cout << u << endl;
+    cout << "回転後の位置を表す複素数 p_c_prime" << endl;
+    cout << p_c_prime << endl;
+    p_c_prime = u * p_c_prime;
+    cout << "もう一度回転させた位置を表す複素数 p_c_prime" << endl;
+    cout << p_c_prime << endl << endl;
 
     return 0;
 }
