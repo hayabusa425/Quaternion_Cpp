@@ -3,6 +3,8 @@
 //#include <math.h>
 #include <string>
 #include <complex>
+#include <OpenGL/OpenGL.h>
+#include <GLUT/GLUT.h>
 
 //#define M_PI 3.141592
 
@@ -169,6 +171,34 @@ template <typename T>
 T det (const Matrix<T, 2> &a)
 {
     return a(0, 0) * a(1, 1) - a(0, 1) * a(1, 0);
+}
+
+// ロール・ピッチ・ヨーを引数に，拡張回転行列を返す関数
+void rotate_mat_by_roll_pitch_yaw(double r[4][4], double roll, double pitch, double yaw)
+{
+    double cos_r = std::cos(roll);
+    double sin_r = std::sin(roll);
+    double cos_p = std::cos(pitch);
+    double sin_p = std::sin(pitch);
+    double cos_y = std::cos(yaw);
+    double sin_y = std::sin(yaw);
+
+    r[0][0] = cos_y * cos_p;
+    r[0][1] = sin_y * cos_p;
+    r[0][2] = -sin_p;
+    r[0][3] = 0;
+    r[1][0] = cos_y * sin_p * sin_r - sin_y * cos_r;
+    r[1][1] = sin_y * sin_p * sin_r + cos_y * cos_r;
+    r[1][2] = cos_p * sin_r;
+    r[1][3] = 0;
+    r[2][0] = cos_y * sin_p * cos_r + sin_y * sin_r;
+    r[2][1] = sin_y * sin_p * cos_r - cos_y * sin_r;
+    r[2][2] = cos_p * cos_r;
+    r[2][3] = 0;
+    r[3][0] = 0;
+    r[3][1] = 0;
+    r[3][2] = 0;
+    r[3][3] = 1;
 }
 
 int main()
