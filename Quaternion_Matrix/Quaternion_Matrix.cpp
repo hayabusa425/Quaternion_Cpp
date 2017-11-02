@@ -192,19 +192,23 @@ int main()
     cout << a(0, 0) << a(0, 1) << endl;
     cout << a(1, 0) << a(1, 1) << endl << endl;
 
-    cout << "転置行列" << endl;
+    cout << "行列 A" << endl;
     e.assign(1, 0, 0);
     e.assign(2, 0, 1);
     e.assign(3, 1, 0);
     e.assign(4, 1, 1);
     cout << e(0, 0) << e(0, 1) << endl;
-    cout << e(1, 0) << e(1, 1) << endl << endl;
+    cout << e(1, 0) << e(1, 1) << endl;
     e.trans();
+    cout << "転置行列 A^t" << endl;
     cout << e(0, 0) << e(0, 1) << endl;
     cout << e(1, 0) << e(1, 1) << endl << endl;
 
     double det_e = det(e);
-    cout << "eの行列式 = " << det_e << endl << endl;
+    cout << "以下の行列式 e について" << endl;
+    cout << e(0, 0) << e(0, 1) << endl;
+    cout << e(1, 0) << e(1, 1) << endl;
+    cout << "これを計算すると" << endl << det_e << endl << endl;
 
     cout << "行列の要素を複素数(2元数)に" << endl;
     //ca(0, 0) = complex<double> (1, 2);
@@ -216,8 +220,7 @@ int main()
     ca.assign(complex<double>(5, 6), 1, 0);
     ca.assign(complex<double>(7, 8), 1, 1);
     cout << ca(0, 0) << ca(0, 1) << endl;
-    cout << ca(1, 0) << ca(1, 1) << endl << endl;    
-
+    cout << ca(1, 0) << ca(1, 1) << endl;    
     cout << "上記の複素数行列を共役複素数に変換" << endl;
     ca.conj();
     cout << ca(0, 0) << ca(0, 1) << endl;
