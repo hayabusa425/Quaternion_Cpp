@@ -201,6 +201,22 @@ void rotate_mat_by_roll_pitch_yaw(double r[4][4], double roll, double pitch, dou
     r[3][3] = 1;
 }
 
+// スクリーンに何かを描画する関数
+/*
+void draw_boxes1()
+{
+    double roll = 50 * (2 * M_PI / 360); // ヨー[rad]
+    double pitch = 40 * (2 * M_PI / 360);
+    double yaw = 30 * (2 * M_PI / 360);
+    double rot[4][4];
+
+    draw_box();
+    rotate_mat_by_roll_pitch_yaw(&rot[0][0], roll, pitch, yaw);
+    glMultMatrix(rot);
+    draw_box();
+}
+*/
+
 int main()
 {
     Matrix<double, 2> a(0), b(1), c(2), d(3), e(0); // 代入値は対角行列の数値(1の時，単位行列になる)
